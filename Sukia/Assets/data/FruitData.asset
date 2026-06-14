@@ -14,47 +14,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FruitData
   fruits:
   - fruitName: charey
-    radius: 0.5
+    radius: 0.1
     points: 1
     color: {r: 0, g: 0, b: 0, a: 0}
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - fruitName: 112
-    radius: 1.5
+    radius: 0.2
     points: 2
     color: {r: 0.9056604, g: 0.3033108, b: 0.3033108, a: 0}
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - fruitName: 34
-    radius: 1.4
+    radius: 0.4
     points: 3
     color: {r: 0.3445621, g: 0.8207547, b: 0.3589975, a: 0}
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - fruitName: 3
-    radius: 1.2
+    radius: 0.55
     points: 35
     color: {r: 0, g: 0, b: 0, a: 0}
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - fruitName: fghs
-    radius: 1
+    radius: 0.7
     points: 7
     color: {r: 0, g: 0, b: 0, a: 0}
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - fruitName: charey
-    radius: 1
+    radius: 0.8
     points: 1
     color: {r: 0, g: 0, b: 0, a: 0}
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - fruitName: charey
-    radius: 1
+    radius: 1.1
     points: 1
     color: {r: 0, g: 0, b: 0, a: 0}
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - fruitName: charey
-    radius: 1
+    radius: 1.3
     points: 1
     color: {r: 0, g: 0, b: 0, a: 0}
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - fruitName: charey
-    radius: 1
+    radius: 1.5
     points: 1
     color: {r: 0, g: 0, b: 0, a: 0}
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

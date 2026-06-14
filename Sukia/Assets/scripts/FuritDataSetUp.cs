@@ -49,11 +49,11 @@ public class FruitDataSetup : EditorWindow
             "Got it!");
     }
 
-    [MenuItem("Tools/Suika Game/Create Scene Bootstrapper")]
-    static void CreateBootstrapper()
+   // [MenuItem("Tools/Suika Game/Create Scene Bootstrapper")]
+   /* static void CreateBootstrapper()
     {
-        GameObject go = new GameObject("Bootstrapper");
-        go.AddComponent<SceneBootstrapper>();
+       // GameObject go = new GameObject("Bootstrapper");
+       // go.AddComponent<SceneBootstrapper>();
 
         // Try to auto-assign FruitData
         FruitData data = AssetDatabase.LoadAssetAtPath<FruitData>("Assets/SuikaGame/FruitData.asset");
@@ -69,6 +69,6 @@ public class FruitDataSetup : EditorWindow
 
         Selection.activeGameObject = go;
         EditorGUIUtility.PingObject(go);
-    }
+    }*/
 }
 #endif 

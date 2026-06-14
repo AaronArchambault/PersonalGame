@@ -48,13 +48,17 @@
     <Analyzer Include="D:\6000.4.11f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\scripts\SceneBootStrapper.cs" />
+    <Compile Include="Assets\scripts\ObstacleTypes.cs" />
+    <Compile Include="Assets\scripts\LevelSelectUi.cs" />
     <Compile Include="Assets\scripts\Fruit.cs" />
+    <Compile Include="Assets\scripts\PowerUpManager.cs" />
+    <Compile Include="Assets\scripts\LevelData.cs" />
     <Compile Include="Assets\scripts\FruitSpriteGenerator.cs" />
     <Compile Include="Assets\scripts\FuritDataSetUp.cs" />
     <Compile Include="Assets\scripts\GameManager.cs" />
     <Compile Include="Assets\scripts\MergeEffect.cs" />
     <Compile Include="Assets\scripts\FruitData.cs" />
+    <Compile Include="Assets\scripts\ObstacleSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

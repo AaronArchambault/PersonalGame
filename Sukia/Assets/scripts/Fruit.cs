@@ -29,31 +29,43 @@ public class Fruit : MonoBehaviour
         fruitIndex = index;
         fruitData = data;
 
-        // Awake may not have run if the GameObject was inactive when instantiated —
-        // fetch components here as a guaranteed fallback.
         if (rb == null)             rb = GetComponent<Rigidbody2D>();
         if (col == null)            col = GetComponent<CircleCollider2D>();
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
 
         var info = data.fruits[index];
 
-        // Set collider size
+        // ── Keep transform scale at exactly 1,1,1 always ──────────────────────
+        // If scale is anything other than 1, Unity multiplies it into the
+        // collider radius, making the physics shape a different size than intended.
+        transform.localScale = Vector3.one;
+
+        // ── Collider ──────────────────────────────────────────────────────────
+        // With scale = 1, col.radius IS the world-space radius. Simple.
         col.radius = info.radius;
 
-        // Set visual
-        transform.localScale = Vector3.one * info.radius * 2f;
+        // ── Sprite ────────────────────────────────────────────────────────────
+        // A default Unity sprite is 1 unit wide at scale 1.
+        // We need it to be (radius * 2) units wide, so scale the GO to diameter.
+        // Because we reset scale to 1 above first, this is always correct.
+        float diameter = info.radius * 2f;
+        transform.localScale = new Vector3(diameter, diameter, 1f);
 
+        // With scale = diameter, the collider radius gets multiplied too!
+        // So we must SET col.radius AFTER setting the scale, dividing by scale
+        // so the final world radius = (info.radius / diameter) * diameter = info.radius
+        col.radius = 0.5f; // 0.5 local units * diameter scale = info.radius world units
+
+        // Generate circle sprite if none assigned
         if (info.sprite != null)
             spriteRenderer.sprite = info.sprite;
         else
-            spriteRenderer.color = info.color;
-
-        // Also generate a circle sprite so the fruit is always visible
-        if (spriteRenderer.sprite == null)
             spriteRenderer.sprite = FruitSpriteGenerator.CreateCircleSprite(info.color, Color.white * 0.6f);
 
-        // Physics settings
-        rb.gravityScale = 1.5f;
+        spriteRenderer.color = Color.white; // tint resets so the generated sprite colour shows correctly
+
+        // ── Physics ───────────────────────────────────────────────────────────
+        rb.gravityScale = 2f;
         rb.linearDamping = 0.3f;
         rb.angularDamping = 0.5f;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
@@ -69,14 +81,12 @@ public class Fruit : MonoBehaviour
         // Move back to Default layer so collisions are active
         gameObject.layer = LayerMask.NameToLayer("Default");
 
-        // Re-enable collider and switch to dynamic one frame later so
-        // PhysX doesn't see an overlap and eject the fruit violently
         StartCoroutine(EnableAndDrop());
     }
 
     IEnumerator EnableAndDrop()
     {
-        // Wait one fixed update so any held-fruit overlap is cleared
+        // Wait one fixed update so the layer change propagates before enabling collision
         yield return new WaitForFixedUpdate();
         col.enabled = true;
         rb.bodyType = RigidbodyType2D.Dynamic;
@@ -102,10 +112,8 @@ public class Fruit : MonoBehaviour
         if (other == null || other.isMerging) return;
         if (other.fruitIndex != fruitIndex) return;
 
-        // Prevent merging the largest fruit (last in the cycle)
         if (fruitIndex >= fruitData.fruits.Length - 1) return;
 
-        // Only the fruit with the lower instance ID initiates to avoid double merge
         if (gameObject.GetInstanceID() < other.gameObject.GetInstanceID())
         {
             isMerging = true;
@@ -120,14 +128,11 @@ public class Fruit : MonoBehaviour
 
         Vector2 midPoint = (transform.position + other.transform.position) / 2f;
 
-        // Spawn merged fruit
         GameManager.Instance.SpawnMergedFruit(fruitIndex + 1, midPoint);
 
-        // Award points
         int earnedPoints = fruitData.fruits[fruitIndex + 1].points;
         GameManager.Instance.AddScore(earnedPoints);
 
-        // Pop effect
         MergeEffect.Spawn(midPoint, fruitData.fruits[fruitIndex + 1].color);
 
         Destroy(other.gameObject);
@@ -139,7 +144,6 @@ public class Fruit : MonoBehaviour
         if (rb == null) rb = GetComponent<Rigidbody2D>();
         if (col == null) col = GetComponent<CircleCollider2D>();
 
-        // Put on Held layer (no collision with anything) while player is aiming
         gameObject.layer = LayerMask.NameToLayer("Held");
 
         rb.bodyType = RigidbodyType2D.Kinematic;
@@ -148,9 +152,6 @@ public class Fruit : MonoBehaviour
         col.enabled = false;
     }
 }
-
-
-
 
 
 

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f370d4f459668498e732a119f84922, type: 3}
+  m_Name: LevelData
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  levelNumber: 1
+  levelTitle: Level 1
+  boardWidth: 8
+  boardHeight: 8
+  movesAllowed: 20
+  targetScore: 0
+  goals:
+  - type: 0
+    targetGemType: 0
+    targetCount: 20
+    label: clear red
+  - type: 2
+    targetGemType: 2
+    targetCount: 800
+    label: reacha score of 800
+  cells: []
